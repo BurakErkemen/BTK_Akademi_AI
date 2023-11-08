@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt 
 
-veriler = pd.read_csv('B:\GitHUB\BTK_Akademi_AI/veriler.csv')
+veriler = pd.read_csv('B:\GitHUB\BTK_Akademi_AI/Datasetler/veriler.csv')
 veriler_boy = veriler[['boy']]
 # print(veriler,"\n")
 # print(veriler_boy)
@@ -14,16 +14,16 @@ veriler_boy = veriler[['boy']]
 # 2.4 Python ve Nesne Yönelimli Programlama
 # =============================================================================
 # classlar
-class insan:
-    boy = 170
-    def kosmak(self,b):
-        return b**2 
-ali = insan()
-print(ali.boy , ali.kosmak(5))
+# class insan:
+#     boy = 170
+#     def kosmak(self,b):
+#         return b**2 
+# ali = insan()
+# print(ali.boy , ali.kosmak(5))
 
-# listeler
-liste = [1,2,3]
-print(liste[1]) 
+# # listeler
+# liste = [1,2,3]
+# print(liste[1]) 
 
 # =============================================================================
 # 2.5 - EKSİK VERİLER   
@@ -83,7 +83,7 @@ s = pd.concat([sonuc_yas_df,sonuc_ulke_df],axis=1)
 # print(s)
 
 s_son = pd.concat([s,sonuc_cinsiyet_df],axis=1)
-print(s_son) # Bu çıktı ile datasetimiz güncellendi 
+# print(s_son) # Bu çıktı ile datasetimiz güncellendi 
 
 # =============================================================================
 # 2.8 - VERİ KÜMESİNİN EĞİTİM ve TEST İÇİN BÖLÜNMESİ
@@ -107,14 +107,6 @@ sc=StandardScaler()
 
 X_Train = sc.fit_transform(x_train)
 X_Test = sc.fit_transform(x_test)
-
-
-# =============================================================================
-# 2.10 - VERİ ÖN İŞLEME ŞABLONU
-# =============================================================================
-
-
-
 
 
 
