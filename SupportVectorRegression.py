@@ -49,6 +49,10 @@ tahmin_normal = sc2.inverse_transform(tahmin_olcekli.reshape(1, -1))
 print("Ölçekli Tahmin:", tahmin_olcekli)
 print("Normal Tahmin:", tahmin_normal)
 
+from sklearn.metrics import r2_score
+print("r2 Değeri: ",r2_score(y_olcekli, svr_reg.predict(x_olcekli)))
+
+
 # =============================================================================
 # Çıktı
 # rbf yerine poly değeriyle verilen çıktı daha beklenilesi bir değerdedir.

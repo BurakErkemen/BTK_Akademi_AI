@@ -3,100 +3,69 @@
 # Polinomlar karesel olarak gider.
 # =============================================================================
 
-import pandas as pd
+#1.kutuphaneler
+import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import preprocessing
-from sklearn.model_selection import train_test_split
+import pandas as pd
 
 # Veri Yükleme
 veriler = pd.read_csv('B:\GitHUB\BTK_Akademi_AI\Datasetler/maaslar.csv')
 
-# Data Frame Dilimleme 
-
 x = veriler.iloc[:,1:2]
-y= veriler.iloc[:,2:]
-
-# Tip Dönüşümü - Numpy Array'e dönüştürüldü
+y = veriler.iloc[:,2:]
 X = x.values
 Y = y.values
 
 
-# Linear(Doğrusal) Model oluşturma ve görselleştirme 
+#linear regression
 from sklearn.linear_model import LinearRegression
-lr = LinearRegression()
-lr.fit(X,Y)
-# =============================================================================
-# plt.scatter(x,y,color='red')
-# plt.plot(x,lr.predict(X),color='blue')
-# =============================================================================
+lin_reg = LinearRegression()
+lin_reg.fit(X,Y)
+
+plt.scatter(X,Y,color='red')
+plt.plot(x,lin_reg.predict(X), color = 'blue')
+plt.show()
 
 
-
-# Polynomial Regression (Dpğrusal olmayan) model oluşturma 
+#polynomial regression
 from sklearn.preprocessing import PolynomialFeatures
-pr = PolynomialFeatures(degree=2) #2. derece polinom
+poly_reg = PolynomialFeatures(degree = 2)
+x_poly = poly_reg.fit_transform(X)
+print(x_poly)
+lin_reg2 = LinearRegression()
+lin_reg2.fit(x_poly,y)
 
-x_poly = pr.fit_transform(X)
-lr2 = LinearRegression()
-lr2.fit(x_poly,y)
+from sklearn.preprocessing import PolynomialFeatures
+poly_reg = PolynomialFeatures(degree = 4)
+x_poly = poly_reg.fit_transform(X)
+print(x_poly)
+lin_reg2 = LinearRegression()
+lin_reg2.fit(x_poly,y)
 
-
-# 4. Dereceden polinom
-pr = PolynomialFeatures(degree=4)
-lr3 = LinearRegression()
-x_poly2 = pr.fit_transform(X)
-lr3.fit(x_poly2,y)
-
-# =============================================================================
 # Görselleştirme
-# =============================================================================
-plt.scatter(X, Y,color='red')
-plt.plot(X,lr2.predict(pr.fit_transform(X)),color='blue')
+
+plt.scatter(X,Y,color = 'red')
+plt.plot(X,lin_reg2.predict(poly_reg.fit_transform(X)), color = 'blue')
 plt.show()
 
-plt.scatter(X, Y,color='red')
-plt.plot(X,lr3.predict(pr.fit_transform(X)),color='blue')
+plt.scatter(X,Y,color = 'red')
+plt.plot(X,lin_reg2.predict(poly_reg.fit_transform(X)), color = 'blue')
 plt.show()
-
 
 # Tahminler
-print("Eğitim Seviyesi 11: ",lr.predict([[11]]))
+print("Eğitim Seviyesi 11: ",lin_reg.predict([[11]]))
 # Linear Reg için değeri= 34716
-print("Eğitim Seviyesi 6.6: ",lr.predict([[6.6]]))
+print("Eğitim Seviyesi 6.6: ",lin_reg.predict([[6.6]]))
 # Linear Reg için değeri = 16923
 
-print("Eğitim Seviyesi 11: ",lr2.predict(pr.fit_transform([[11]])))
+print("Eğitim Seviyesi 11: ",lin_reg2.predict(poly_reg.fit_transform([[11]])))
 # Polynomial Reg için değeri = 89041
-print("Eğitim Seviyesi 6.6: ",lr2.predict(pr.fit_transform([[6.6]])))
+print("Eğitim Seviyesi 6.6: ",lin_reg2.predict(poly_reg.fit_transform([[6.6]])))
 # Polynomial Reg için değeri = 8146 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+from sklearn.metrics import r2_score
+print(r2_score(Y, lin_reg2.predict(poly_reg.fit_transform(X))))
+# R2 değeri 0.99
 
 
 
