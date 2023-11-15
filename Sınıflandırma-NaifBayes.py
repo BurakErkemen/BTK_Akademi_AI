@@ -37,7 +37,6 @@ X_test = scaler.transform(x_test)
 gnb = GaussianNB()
 gnb.fit(X_train, y_train)
 
-
 y_pred = gnb.predict(X_test)
 
 from sklearn.metrics import confusion_matrix
